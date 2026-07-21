@@ -28,10 +28,9 @@ export const addSong = async (req, res) => {
 
   try {
     await song.save()
+    res.status(201).json(song)
   } catch (err) {
-    for (let e in err.errors) {
-      console.log(err.errors[e].message)
-    }
+    console.error(err)
+    res.status(500).end()
   }
-
-  res.send(song)
+}
